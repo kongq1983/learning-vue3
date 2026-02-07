@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图片绑定与事件示例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        img { border: 2px solid #42b883; border-radius: 8px; transition: transform 0.3s; }
+        img:hover { transform: scale(1.05); }
+        button { margin-top: 20px; padding: 8px 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="./index.html">返回示例目录</a>
+
+    <div id="app">
+        <h3>{{ title }}</h3>
+        <img :src="picUrl" width="200" alt="图片加载中...">
+        <br>
+        <button @click="changePic">点我换一张图</button>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+        
+        createApp({
+            setup() {
+                const title = ref('这是 Vue 图标');
+                const picUrl = ref('https://vuejs.org/images/logo.png');
+
+                const changePic = () => {
+                    // 切换图片和文字
+                    if (title.value === '这是 Vue 图标') {
+                        title.value = '这是 Vite 图标';
+                        picUrl.value = 'https://vitejs.dev/logo.svg';
+                    } else {
+                        title.value = '这是 Vue 图标';
+                        picUrl.value = 'https://vuejs.org/images/logo.png';
+                    }
+                };
+
+                return { title, picUrl, changePic }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

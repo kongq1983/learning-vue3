@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>methods 示例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <a href="./index.html">返回示例目录</a>
+
+    <div id="app">
+        <h3>{{ showInfo() }}</h3>
+    </div>
+
+    <script>
+       const { createApp, ref } = Vue;
+       createApp({
+        setup() {
+            const title = ref('书是人类进步的阶梯');
+            const author = ref('高尔基');
+            return { title, author }
+        },
+        methods: {
+            showInfo() {
+                return `${this.title} - ${this.author}`;
+            }
+        }
+       }).mount('#app');
+    </script>
+</body>
+</html>

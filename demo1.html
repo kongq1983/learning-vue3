@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue 3 响应式模型示例</title>
+  <!-- 从 CDN 加载 Vue 3 -->
+  <script type="module">
+    import { createApp, ref, reactive, computed } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+    createApp({
+      setup() {
+        // 1. 使用 ref 定义基本类型响应式变量
+        const count = ref(0)
+        const name = ref('Vue Learner')
+
+        // 2. 使用 reactive 定义对象类型的响应式数据
+        const user = reactive({
+          age: 25,
+          email: 'learner@example.com'
+        })
+
+        // 3. 计算属性：自动响应依赖变化
+        const displayName = computed(() => {
+          return `${name.value} (年龄: ${user.age})`
+        })
+
+        // 4. 方法：修改响应式数据
+        const increment = () => {
+          count.value++
+          user.age++
+        }
+
+        const updateName = () => {
+          name.value = prompt('请输入新名字:', name.value) || name.value
+        }
+
+        // 5. 返回所有要在模板中使用的变量和方法
+        return {
+          count,
+          name,
+          user,
+          displayName,
+          increment,
+          updateName
+        }
+      }
+    }).mount('#app')
+  </script>
+</head>
+<body>
+  <a href="./index.html">返回示例目录</a>
+
+  <div id="app">
+    <h2>{{ displayName }}</h2>
+    <p>计数器: {{ count }}</p>
+    <p>邮箱: {{ user.email }}</p>
+
+    <button @click="increment">+1</button>
+    <button @click="updateName">修改名字</button>
+  </div>
+</body>
+</html>

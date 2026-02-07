@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>v-html 指令示例</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <style>
+    .title {
+      background: #6699FF;
+      color: #FFFFFF;
+      border: 1px solid #FF0000;
+      display: inline-block;
+      padding: 10px;
+      font-size: 18px;
+    }
+  </style>
+
+</head>
+<body>
+  <a href="../index.html">返回示例目录</a>
+
+  <div id="app">
+    <span v-bind:class="titleCss">成功属于马上行动的人</span> <br>
+    <a v-bind:href="hrefUrl" :title="hrefTitle">{{hrefText}}</a> <br>
+    <img v-bind:src="imageSrc" title="风景图片" style="width:200px;margin-top:10px">
+  
+    <p v-if="showWelcome">欢迎来到 Vue.js 的世界！</p><br>
+
+    <button @click="showWelcome = !showWelcome">{{ showWelcome ? '隐藏欢迎信息' : '显示欢迎信息' }}</button>  <br>
+    <!-- 动态参数 -->
+
+    <img v-bind:[attr]="imageSrc" style="width:200px;margin-top:10px"> <br>
+
+  </div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const titleCss = ref('title')
+      const hrefUrl = ref('https://vuejs.org')
+      const hrefText = ref('Vue 官网')
+      const hrefTitle = ref('Vue官网例子')
+      const imageSrc = ref('../images/fengjing-1.jpg')
+      const attr = ref('src')
+      const showWelcome = ref(false)
+      return {
+        titleCss,
+        hrefUrl,
+        hrefText,
+        hrefTitle,
+        imageSrc,
+        attr,
+        showWelcome
+      }
+    }
+  }).mount('#app')
+</script>

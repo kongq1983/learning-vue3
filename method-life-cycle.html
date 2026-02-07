@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期示例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+</head>
+<body>
+    <a href="./index.html">返回示例目录</a>
+
+    <div id="app">
+        <h3>{{ title }}</h3>
+    </div>
+
+    <script>
+       const { createApp, ref } = Vue;
+       
+       // 1. 创建应用实例
+       const app = createApp({
+        setup() {
+            const title = ref('书是人类进步的阶梯');
+            return { title }
+        },
+        // 1. 组件实例创建前
+        beforeCreate() {
+            console.log('beforeCreate：data 和 methods 还不可用', this.title);
+        },
+        // 2. 组件实例创建后
+        created() {
+            console.log('created：可以访问 data 和 methods', this.title);
+        },
+        // 3. 挂载到页面之前
+        beforeMount() {
+            console.log('beforeMount：模板已编译但还没挂载到页面');
+        },
+        // 4. 挂载到页面之后
+        mounted() {
+            console.log('mounted：组件已经挂载到页面上了');
+        },
+        // 5. 数据更新前
+        beforeUpdate() {
+            console.log('beforeUpdate：即将根据最新数据重新渲染，当前 title =', this.title);
+        },
+        // 6. 数据更新后
+        updated() {
+            console.log('updated：视图已经根据最新数据更新，当前 title =', this.title);
+        },
+        // 7. 组件卸载前（类似 Vue2 的 beforeDestroy）
+        beforeUnmount() {
+            console.log('beforeUnmount：组件即将从页面卸载');
+        },
+        // 8. 组件卸载后（类似 Vue2 的 destroyed）
+        unmounted() {
+            console.log('unmounted：组件已经从页面上被卸载');
+        }
+       });
+
+       // 2. 挂载到页面，拿到组件实例 vm
+       const vm = app.mount('#app');
+
+       // 3. 2 秒后修改数据，触发 beforeUpdate / updated，并更新页面文字
+       setTimeout(() => {
+            vm.title = '不积小流，无以成江海';
+       }, 2000);
+    </script>
+</body>
+</html>

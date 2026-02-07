@@ -1,0 +1,167 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>v-bind 示例（Vue 3）</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:20px;line-height:1.6}
+    h1{margin-bottom:8px}
+    section{border:1px solid #eee;padding:12px;margin:12px 0;border-radius:6px}
+    .row{display:flex;gap:12px;align-items:center}
+    .example{background:#fafafa;padding:8px;border-radius:4px}
+    .active-class{background:rgba(0,128,0,0.08);padding:2px 6px;border-radius:3px}
+    .text-danger{color:#c00}
+    .child{padding:6px;border-left:3px solid #ddd;margin:6px 0}
+    button{cursor:pointer}
+    pre{background:#111;color:#dfe;overflow:auto;padding:8px}
+    a.back{display:inline-block;margin-bottom:12px}
+  </style>
+
+</head>
+<body>
+  <a class="back" href="../index.html">返回示例目录</a>
+
+  <h1>v-bind 示例（Vue 3）</h1>
+  <div id="app">
+
+    <section>
+      <strong>基本属性绑定（: 或 v-bind:）</strong>
+      <div class="row">
+        <a :href="url" target="_blank" class="example">访问 Vue 官网（:href）</a>
+        <img :src="logo" :alt="imageAlt" style="height:36px;margin-left:8px">
+      </div>
+      <pre>&lt;a :href="url"&gt;... &lt;img :src="logo" :alt="imageAlt"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>布尔属性绑定（disabled/required 等）</strong>
+      <div class="row">
+        <button :disabled="isDisabled">按钮（:disabled）</button>
+        <button @click="isDisabled = !isDisabled">切换 disabled</button>
+      </div>
+      <pre>&lt;button :disabled="isDisabled"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>class 绑定（对象 / 数组 / 字符串）</strong>
+      <div class="row">
+        <div :class="{ active: isActive, 'text-danger': hasError }" class="example">对象语法</div>
+        <div :class="[activeClass, hasError ? errorClass : '']" class="example">数组语法</div>
+        <div :class="computedClass" class="example">计算属性（字符串）</div>
+        <div style="margin-left:8px">
+          <button @click="isActive = !isActive">切换 active</button>
+          <button @click="hasError = !hasError">切换 error</button>
+        </div>
+      </div>
+      <pre>&lt;div :class="{ active: isActive }"&gt; 或 &lt;div :class="[classA, classB]"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>style 绑定（对象 / 数组）</strong>
+      <div class="row">
+        <div :style="{ color: activeColor, fontSize: fontSize + 'px' }" class="example">对象 style</div>
+        <div :style="[baseStyle, overridingStyle]" class="example">数组 style</div>
+        <div style="margin-left:8px">
+          <button @click="fontSize += 2">增大字号</button>
+          <button @click="activeColor = activeColor === 'tomato' ? 'teal' : 'tomato'">切换颜色</button>
+        </div>
+      </div>
+      <pre>&lt;div :style="{ color: activeColor }"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>动态参数（动态属性名）</strong>
+      <div class="row">
+        <input v-model="attrName" placeholder="输入属性名（如 title / id / data-info）">
+        <input v-model="attrValue" placeholder="属性值">
+        <button v-bind:[attrName]="attrValue">带动态属性的按钮（v-bind:[attrName]）</button>
+      </div>
+      <pre>v-bind:[attrName]="attrValue"</pre>
+    </section>
+
+    <section>
+      <strong>将对象全部绑定到元素（v-bind="object"）</strong>
+      <div class="row">
+        <button v-bind="attrs">对象绑定（v-bind="attrs"）</button>
+      </div>
+      <pre>v-bind="attrs" （将对象中的键值全部作为属性绑定）</pre>
+    </section>
+
+    <section>
+      <strong>绑定组件 Props（:prop / v-bind）</strong>
+      <div class="row">
+        <child :label="childProps.label" :count="childProps.count" />
+        <child v-bind="childProps" />
+      </div>
+      <pre>&lt;child :label="childProps.label" :count="childProps.count" /&gt; 或 &lt;child v-bind="childProps" /&gt;</pre>
+    </section>
+
+    <section>
+      <strong>.prop 修饰符（直接设置 DOM property）</strong>
+      <div class="row">
+        <label><input type="checkbox" :checked.prop="isChecked"> 使用 .prop 绑定 checked</label>
+        <button @click="isChecked = !isChecked">切换 checked</button>
+      </div>
+      <pre>&lt;input type="checkbox" :checked.prop="isChecked"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>数据属性与 ARIA（data-*, aria-*）</strong>
+      <div class="row">
+        <button :aria-label="ariaLabel" :data-index="index">ARIA & data 示例</button>
+      </div>
+      <pre>&lt;button :aria-label="ariaLabel" :data-index="index"&gt;</pre>
+    </section>
+
+    <section>
+      <strong>示例状态（调试用）</strong>
+      <pre>{{ $data }}</pre>
+    </section>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue;
+
+    const Child = {
+      props: ['label','count'],
+      template: `<div class="child"><strong>{{ label }}</strong>：{{ count }}</div>`
+    };
+
+    createApp({
+      components: { Child },
+      data() {
+        return {
+          url: 'https://vuejs.org',
+          logo: 'https://cn.vuejs.org/images/logo.png',
+          imageAlt: 'Vue Logo',
+          isDisabled: false,
+          isActive: true,
+          hasError: false,
+          activeClass: 'active-class',
+          errorClass: 'text-danger',
+          activeColor: 'tomato',
+          fontSize: 16,
+          baseStyle: { color: 'blue', fontWeight: '600' },
+          overridingStyle: { fontSize: '18px' },
+          attrName: 'title',
+          attrValue: '动态标题',
+          attrs: { id: 'btn-bound', title: '对象绑定标题', 'data-info': '来自 attrs 对象' },
+          childProps: { label: '计数', count: 42 },
+          isChecked: true,
+          ariaLabel: '提交按钮',
+          index: 7
+        };
+      },
+      computed: {
+        computedClass() {
+          return this.isActive ? 'active-class' : '';
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

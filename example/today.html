@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>今天日期示例</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <a href="./index.html">返回示例目录</a>
+
+  <div id="app">{{ message() }}</div>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        const today = new Date()
+        return {
+          today
+        }
+      },
+      methods: {
+        // 把 weekdays 封装成方法，0 和 7 都视为星期日
+        getWeekday(n) {
+          const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+          const idx = ((typeof n === 'number' ? n : 0) % 7 + 7) % 7 // 保证 0-6
+          return weekdays[idx]
+        },
+
+        message() {
+          // 返回下面格式 + 星期几
+          const wd = this.getWeekday(this.today.getDay())
+          return `今天是 ${this.today.getFullYear()}年${this.today.getMonth() + 1}月${this.today.getDate()}日 ${wd}`
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
