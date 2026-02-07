@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>v-if / v-else-if 季节示例</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:20px;line-height:1.6}
+    .box{max-width:640px}
+    input{padding:6px}
+  </style>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <a href="../index.html">返回示例目录</a>
+  <div id="app" class="box">
+    <h1>v-if / v-else-if：根据输入日期显示季节</h1>
+
+    <div>
+      <label>选择日期： <input type="date" v-model="dateStr"></label>
+    </div>
+
+    <p>当前选择：{{ dateStr || '未选择' }}</p>
+
+    <div v-if="!dateStr">
+      请输入一个日期以判断季节。
+    </div>
+
+    <div v-else>
+      <p v-if="season === '春'">现在是春季 🌸（3-5 月）</p>
+      <p v-else-if="season === '夏'">现在是夏季 ☀️（6-8 月）</p>
+      <p v-else-if="season === '秋'">现在是秋季 🍂（9-11 月）</p>
+      <p v-else-if="season === '冬'">现在是冬季 ❄️（12-2 月）</p>
+      <p v-else>无法判断季节</p>
+    </div>
+
+    <hr>
+    <p>说明：通过解析所选日期的月份，并使用 v-if / v-else-if 进行季节判断。</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return { dateStr: '' };
+      },
+      computed: {
+        season() {
+          if (!this.dateStr) return '';
+          const month = new Date(this.dateStr).getMonth() + 1;
+          if (month >= 3 && month <= 5) return '春';
+          else if (month >= 6 && month <= 8) return '夏';
+          else if (month >= 9 && month <= 11) return '秋';
+          else return '冬';
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
