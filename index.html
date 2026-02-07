@@ -1,105 +1,65 @@
-﻿  <html>
-  <h2>Common</h2>
-  <ul>
-    <li>
-      <a href="./demo.html">最简单 Hello Vue 示例<span class="path">demo.html</span></a>
-    </li>
-    <li>
-      <a href="./data.html">data &amp; ref 基础示例<span class="path">data.html</span></a>
-    </li>
-    <li>
-      <a href="./method.html">methods 方法示例<span class="path">method.html</span></a>
-    </li>
-    <li>
-      <a href="./method-life-cycle.html">生命周期钩子示例<span class="path">method-life-cycle.html</span></a>
-    </li>
-    <li>
-      <a href="./image-demo.html">图片绑定与事件示例<span class="path">image-demo.html</span></a>
-    </li>
-    <li>
-      <a href="./demo1.html">响应式模型综合示例<span class="path">demo1.html</span></a>
-    </li>
-  </ul>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vue3 学习示例目录</title>
+  <style>
+    :root{--accent:#42b883;--muted:#88939a;--bg:#f5f7f8}
+    body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; margin:0;background:var(--bg);color:#0f1720}
+    .wrap{max-width:1100px;margin:40px auto;padding:28px}
+    h1{color:var(--accent);margin:0 0 6px;font-weight:600}
+    .desc{color:#475569;margin:8px 0 20px}
 
-  <h2>Tag</h2>
-  <ul>
-    <li>
-      <a href="./tag/v-html.html">内联指令 v-html 示例<span class="path">tag/v-html.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/v-bind.html">内联指令 v-bind 示例<span class="path">tag/v-bind.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/v-bind-class.html">内联指令 v-bind 示例<span class="path">tag/v-bind-class.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/if-else.html">v-if / v-else-if 季节示例<span class="path">tag/if-else.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/expression.html">表达式示例（邮箱 &amp; QQ）<span class="path">tag/expression.html</span></a>
-    </li>
-  </ul>
+    .lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background:#fff;border-radius:12px;padding:14px;border:1px solid rgba(15,23,36,0.06);box-shadow:0 8px 24px rgba(15,23,36,0.03)}
+    .card h2{margin:0 0 8px;color:#145c46;font-size:1.05rem}
 
-  <h2>Example</h2>
-  <ul>
-    <li>
-      <a href="./example/today.html">显示今天示例<span class="path">example/today.html</span></a>
-    </li>
-  </ul>
-      padding: 10px 14px;
-      text-decoration: none;
-      color: #333;
-    }
-    a span.path {
-      font-size: 12px;
-      color: #999;
-      margin-left: 8px;
-    }
+    .list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+    .item{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(#fff,#fbfdfe);border:1px solid rgba(15,23,36,0.04);transition:transform .12s,box-shadow .12s}
+    .item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(15,23,36,0.06)}
+    .item a{color:#0f1720;text-decoration:none;font-weight:550}
+    .path{font-size:12px;color:var(--muted);margin-left:10px}
+
+    @media (max-width:520px){.wrap{padding:16px}.lists{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <h1>Vue3 学习示例目录</h1>
-  <p class="desc">点击下面的链接进入对应示例页面。</p>
+  <div class="wrap">
+    <h1>Vue3 学习示例目录</h1>
+    <p class="desc">点击下面的卡片进入对应示例页面。</p>
 
-  <ul>
-    <li>
-      <a href="./demo.html">最简单 Hello Vue 示例<span class="path">demo.html</span></a>
-    </li>
-    <li>
-      <a href="./data.html">data &amp; ref 基础示例<span class="path">data.html</span></a>
-    </li>
-    <li>
-      <a href="./method.html">methods 方法示例<span class="path">method.html</span></a>
-    </li>
-    <li>
-      <a href="./method-life-cycle.html">生命周期钩子示例<span class="path">method-life-cycle.html</span></a>
-    </li>
-    <li>
-      <a href="./image-demo.html">图片绑定与事件示例<span class="path">image-demo.html</span></a>
-    </li>
-    
-    <li>
-      <a href="./demo1.html">响应式模型综合示例<span class="path">demo1.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/v-html.html">内联指令 v-html 示例<span class="path">tag/v-html.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/v-bind.html">内联指令 v-bind 示例<span class="path">tag/v-bind.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/v-bind-class.html">内联指令 v-bind 示例<span class="path">tag/v-bind-class.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/if-else.html">v-if / v-else-if 季节示例<span class="path">tag/if-else.html</span></a>
-    </li>
-    <li>
-      <a href="./tag/expression.html">表达式示例（邮箱 &amp; QQ）<span class="path">tag/expression.html</span></a>
-    </li>
-    
-    <li>
-      <a href="./example/today.html">显示今天示例<span class="path">example/today.html</span></a>
-    </li>
-  </ul>
+    <div class="lists">
+      <section class="card">
+        <h2>Common</h2>
+        <ul class="list">
+          <li class="item"><a href="./demo.html">最简单 Hello Vue 示例</a><span class="path">demo.html</span></li>
+          <li class="item"><a href="./data.html">data &amp; ref 基础示例</a><span class="path">data.html</span></li>
+          <li class="item"><a href="./method.html">methods 方法示例</a><span class="path">method.html</span></li>
+          <li class="item"><a href="./method-life-cycle.html">生命周期钩子示例</a><span class="path">method-life-cycle.html</span></li>
+          <li class="item"><a href="./image-demo.html">图片绑定与事件示例</a><span class="path">image-demo.html</span></li>
+          <li class="item"><a href="./demo1.html">响应式模型综合示例</a><span class="path">demo1.html</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Tag</h2>
+        <ul class="list">
+          <li class="item"><a href="./tag/v-html.html">内联指令 v-html 示例</a><span class="path">tag/v-html.html</span></li>
+          <li class="item"><a href="./tag/v-bind.html">内联指令 v-bind 示例</a><span class="path">tag/v-bind.html</span></li>
+          <li class="item"><a href="./tag/v-bind-class.html">内联指令 v-bind 示例</a><span class="path">tag/v-bind-class.html</span></li>
+          <li class="item"><a href="./tag/if-else.html">v-if / v-else-if 季节示例</a><span class="path">tag/if-else.html</span></li>
+          <li class="item"><a href="./tag/expression.html">表达式示例（邮箱 &amp; QQ）</a><span class="path">tag/expression.html</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Example</h2>
+        <ul class="list">
+          <li class="item"><a href="./example/today.html">显示今天示例</a><span class="path">example/today.html</span></li>
+        </ul>
+      </section>
+    </div>
+  </div>
 </body>
 </html>
