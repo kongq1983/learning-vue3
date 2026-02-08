@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>v-if 与 v-show 对比示例</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:20px;line-height:1.6}
+    .box{max-width:720px}
+    .demo{padding:12px;border:1px dashed #cbd5e1;border-radius:8px;margin:10px 0}
+    .red{background:#fff7f7}
+    .green{background:#f7fff7}
+    button{margin-right:8px;padding:6px 10px}
+  </style>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <a href="../index.html">返回示例目录</a>
+  <div id="app" class="box">
+    <h1>v-if 与 v-show：区别与对比</h1>
+
+    <p>下面两个卡片分别演示用 `v-if` 和 `v-show` 控制元素显示：一个通过销毁/创建 DOM（`v-if`），一个通过 CSS `display` 隐藏（`v-show`）。</p>
+
+    <div>
+      <button @click="showIf = !showIf">切换 v-if (当前: {{ showIf }})</button>
+      <button @click="showShow = !showShow">切换 v-show (当前: {{ showShow }})</button>
+      <button @click="toggleBoth">同时切换两者</button>
+    </div>
+
+    <div class="demo red">
+      <h3>v-if 示例（DOM 会被创建/销毁）</h3>
+      <div v-if="showIf">
+        <p>这是 v-if 渲染的内容 —— 每次变为 false 时会被移除。</p>
+        <input v-model="textIf" placeholder="v-if 输入会随元素销毁而丢失">
+        <p>输入内容：{{ textIf }}</p>
+      </div>
+      <div v-else>
+        <p>v-if 当前为 false，内容被移除。</p>
+      </div>
+    </div>
+
+    <div class="demo green">
+      <h3>v-show 示例（通过 CSS display 隐藏）</h3>
+      <div v-show="showShow">
+        <p>这是 v-show 渲染并始终保留在 DOM 中的内容。</p>
+        <input v-model="textShow" placeholder="v-show 输入会保留">
+        <p>输入内容：{{ textShow }}</p>
+      </div>
+      <div v-if="!showShow">
+        <p>虽然隐藏，但 DOM 仍存在（检查页面元素可见）。</p>
+      </div>
+    </div>
+
+    <hr>
+    <h4>要点</h4>
+    <ul>
+      <li>当频繁切换且需要保留状态时，优先使用 <strong>v-show</strong>（开销小，切换仅变更样式）。</li>
+      <li>当条件很少变更或条件为 false 时不应占用 DOM 时，使用 <strong>v-if</strong>（会销毁/重建）。</li>
+    </ul>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return { showIf: true, showShow: true, textIf: '', textShow: '' };
+      },
+      methods: {
+        toggleBoth() { this.showIf = !this.showIf; this.showShow = !this.showShow; }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
