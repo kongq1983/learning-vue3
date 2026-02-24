@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GetSet</title>
+
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<span>{{fullname}}</span>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript">
+const vm = Vue.createApp({
+	data(){
+		return {
+			firstname : '张',
+			lastname : '三'
+		}
+	},
+	computed : {
+		fullname : {
+			// getter
+			get() {
+				return this.firstname + ' ' + this.lastname +' '+new Date().toLocaleTimeString();
+			},
+			// setterv
+			set(value) {
+				this.firstname = value.slice(0,1);
+				this.lastname = value.slice(1);
+			}
+	    }
+    }
+}).mount('#app');
+
+//设置fullname属性会触发setter函数，改变firstname和lastname的值
+vm.fullname = '李四';
+</script>
+</body>
+</html>

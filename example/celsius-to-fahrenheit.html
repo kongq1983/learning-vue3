@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<title>摄氏转华氏温度</title>
+
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<p>摄氏温度：<input type="number" v-model.number="celsius"> °C</p>
+	<p>华氏温度：{{fahrenheit}} °F</p>
+</div>
+<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+<script src="https://unpkg.com/vue@3"></script>
+<script type="text/javascript">
+	const vm = Vue.createApp({
+		data(){
+			return {
+				celsius: 20
+			}
+		},
+		computed : {
+			fahrenheit: function(){
+				return this.celsius * 9/5 + 32;
+			}
+		}
+	}).mount('#app');
+</script>
+
+
+</body>
+
+			
+
+</html>
+
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>统计商品总价</title>
+<style>
+body{
+font-family:微软雅黑;
+font-size:14px}
+.title{
+background: #f6f6f6;
+font-size:18px;
+}
+.title,.content{
+width:400px;
+height:36px;
+line-height:36px;
+border: 1px solid #dddddd;}
+.title:not(:first-child),.content{
+border-top:none;}
+.title div{
+width:100px;
+text-align:center;
+float:left}
+.content{
+clear:both}
+.content div{
+width:100px;
+text-align:center;
+float:left}
+p{
+width:380px;
+text-align:right;}
+</style>
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<div class="title">
+		<div>商品名称</div>
+		<div>单价</div>
+		<div>数量</div>
+		<div>金额</div>
+	</div>
+	<div class="content" v-for="value in shop">
+		<div>{{value.name}}</div>
+		<div>{{value.price.toFixed(2)}}</div>
+		<div>{{value.count}}</div>
+		<div>{{(value.price*value.count).toFixed(2)}}</div>
+	</div>
+	<p>合计：¥{{totalprice.toFixed(2)}}</p>
+</div>
+<script src="https://unpkg.com/vue@3"></script>
+<script type="text/javascript">
+const vm = Vue.createApp({
+	data(){
+		return {
+			shop : [{//定义商品信息数组
+				name : 'OPPO Reno11',
+				price : 2599,
+				count : 2
+			},{
+				name : '华为 Mate60',
+				price : 7299,
+				count : 3
+			}]
+		}
+	},
+	computed : {
+		totalprice : function(){
+			var total = 0;
+			this.shop.forEach(function(s){
+				total += s.price * s.count;//计算商品总价
+			});
+			return total;
+		}
+	}
+}).mount('#app');
+</script>
+</body>
+</html>
