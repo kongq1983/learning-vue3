@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GetSet</title>
+
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<input v-model="message">
+	<p>{{message}}</p>
+	<p>{{getNowTimeC}}</p>
+	<p>{{getNowTimeM()}}</p>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript">
+const vm = Vue.createApp({
+	data(){
+		return {
+			message : '',
+			text1 : '通过计算属性获取当前时间',
+			text2 : '通过方法获取当前时间'
+		}
+	},
+	computed : {
+		getNowTimeC : function(){
+			var hour = new Date().getHours();
+			var minute = new Date().getMinutes();
+			var second = new Date().getSeconds();
+			return this.text1 + '：' + hour + ':' + minute + ':' + second;
+	    }
+    },
+	methods : {
+		getNowTimeM : function(){
+			var hour = new Date().getHours();
+			var minute = new Date().getMinutes();
+			var second = new Date().getSeconds();
+			return this.text2 + '：' + hour + ':' + minute + ':' + second;
+		}
+	}
+}).mount('#app');
+
+</script>
+</body>
+</html>

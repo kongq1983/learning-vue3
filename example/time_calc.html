@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GetSet</title>
+
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<label for="hour">小时：</label>
+	<input type="number" id="hour" v-model.number="hour">
+	<label for="minute">分钟：</label>
+	<input type="number" id="minute" v-model.number="minute">
+	{{ hour.toFixed(2) }}小时={{minute}}分钟
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript">
+const vm = Vue.createApp({
+	data(){
+		return {
+			hour : 0,
+			minute : 0
+		}
+	},
+	watch : {
+		hour : function(val){
+			this.minute = val * 60;
+		},
+		minute : function(val){
+			this.hour = val/60;
+		}
+	}
+}).mount('#app');
+
+</script>
+</body>
+</html>
