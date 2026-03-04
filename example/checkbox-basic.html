@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>复选框示例</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .panel {
+      max-width: 560px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .group-title {
+      margin: 12px 0 8px;
+      font-weight: 600;
+    }
+    .option {
+      display: block;
+      margin: 6px 0;
+    }
+    .result {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+  <a href="/index.html">返回示例目录</a>
+
+  <div id="app" class="panel">
+    <h3>checkbox v-model 示例</h3>
+
+    <p class="group-title">选择你感兴趣的方向：</p>
+    <label class="option" v-for="item in options" :key="item.value">
+      <input type="checkbox" :value="item.value" v-model="selectedItems" />
+      {{ item.label }}
+    </label>
+
+    <label class="option">
+      <input type="checkbox" v-model="agreed" />
+      我已阅读并同意学习计划
+    </label>
+
+    <div class="result">
+      <p>当前已选：{{ selectedText }}</p>
+      <p>同意状态：{{ agreed ? '已同意' : '未同意' }}</p>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          selectedItems: [],
+          agreed: false,
+          options: [
+            { value: 'vue', label: 'Vue 基础' },
+            { value: 'ts', label: 'TypeScript' },
+            { value: 'router', label: 'Vue Router' },
+            { value: 'pinia', label: 'Pinia 状态管理' }
+          ]
+        }
+      },
+      computed: {
+        selectedText() {
+          return this.selectedItems.length ? this.selectedItems.join('、') : '暂无选择'
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

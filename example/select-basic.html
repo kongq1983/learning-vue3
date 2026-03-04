@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>下拉框示例</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .panel {
+      max-width: 520px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    select {
+      min-width: 220px;
+      height: 34px;
+      padding: 0 8px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <a href="/index.html">返回示例目录</a>
+
+  <div id="app" class="panel">
+    <h3>下拉框 v-model 示例</h3>
+    <label for="city">选择城市:</label>
+    <select id="city" v-model="selectedCode">
+      <option value="">-- 请选择 --</option>
+      <option v-for="city in cities" :key="city.code" :value="city.code">
+        {{ city.name }}
+      </option>
+    </select>
+
+    <p v-if="selectedCity">当前选择: {{ selectedCity.name }} ({{ selectedCity.code }})</p>
+    <p v-else>当前还没有选择城市。</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          selectedCode: '',
+          cities: [
+            { code: 'BJ', name: '北京' },
+            { code: 'SH', name: '上海' },
+            { code: 'GZ', name: '广州' },
+            { code: 'SZ', name: '深圳' }
+          ]
+        }
+      },
+      computed: {
+        selectedCity() {
+          return this.cities.find((city) => city.code === this.selectedCode) || null
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

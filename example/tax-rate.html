@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GetSet</title>
+<style>
+body{
+font-family:微软雅黑;
+font-size:14px}
+.title{
+background: #f6f6f6;
+font-size:18px;
+}
+.title,.content{
+width:600px;
+height:36px;
+line-height:36px;
+border: 1px solid #dddddd;}
+.title:not(:first-child),.content{
+border-top:none;}
+.title div{
+width:100px;
+text-align:center;
+float:left}
+.content{
+clear:both}
+.content div{
+width:100px;
+text-align:center;
+float:left}
+p{
+width:380px;
+text-align:right;}
+</style>
+</head>
+<body>
+	<a href="/index.html">返回示例目录</a>
+<div id="app">
+	<div class="title">
+		<div>姓名</div>
+		<div>月度收入</div>
+		<div>专项扣除</div>
+		<div>个税</div>
+		<div>工资</div>
+	</div>
+	<div class="content" v-for="(item, index) in staff" :key="index">
+		<div>{{ item.name }}</div>
+		<div>{{ item.income }}</div>
+		<div>{{ insurance }}</div>
+		<div>{{ wages[index].tax.toFixed(2) }}</div>
+		<div>{{ (item.income - insurance - wages[index].tax).toFixed(2) }}</div>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript">
+const vm = Vue.createApp({
+	data(){
+		return {
+			insurance : 800,
+			threshold : 5000,
+			tax: 0.03,
+			staff: [
+				{name: '张三', income: 9700},
+				{name: '李四', income: 8600},
+				{name: '王五', income: 6500}
+			]
+		}
+	},
+	computed : {
+		wages : function() {
+			var t = this;
+			var taxArr = [];
+			t.staff.forEach(function(item){
+				var tax = (item.income - t.insurance - t.threshold) * t.tax;
+				taxArr.push({
+					tax
+				});
+			});
+			return taxArr;
+		}
+	}
+}).mount('#app');
+
+</script>
+</body>
+</html>
